@@ -1,0 +1,4 @@
+#ifndef MATRICEIMPL_H
+#define MATRICEIMPL_H
+
+#endif // MATRICEIMPL_H
