@@ -7,7 +7,7 @@
 template <typename T>
 class Vecteur
 {
-	friend std::ostream& operator <<(std::ostream& os, const Vecteur<T>& vect);
+	//friend std::ostream& operator <<(std::ostream& os, const Vecteur<T>& vect);
 
 public :
 	Vecteur(vector<T>)

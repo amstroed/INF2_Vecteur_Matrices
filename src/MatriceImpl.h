@@ -4,12 +4,86 @@
 #include <vector>
 #include "Vecteur.h"
 
-
-template <typename T>
-bool Matrice<T>::estVide(){
- return 1;
+template<typename T>
+Matrice<T>::Matrice() {
 }
 
+template<typename T>
+Matrice<T>::Matrice(unsigned lignes) {
 
+	this->resize(lignes);
+
+}
+
+template<typename T>
+Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) {
+
+	this->resize(lignes, colonnes);
+
+}
+
+template<typename T>
+vector<T> Matrice<T>::at(unsigned n) {
+
+	return this->contenuMatrice.at(n);
+
+}
+
+template<typename T>
+unsigned Matrice<T>::size() {
+
+	this->contenuMatrice.size();
+
+}
+
+template<typename T>
+void Matrice<T>::resize(unsigned int taille) {
+
+	this->contenuMatrice.resize(taille);
+
+}
+
+template<typename T>
+void Matrice<T>::resize(unsigned taille, unsigned colonne) {
+
+	this->contenuMatrice.resize(taille);
+
+	for (size_t i = 0; i < this->contenuMatrice.size(); i++) {
+
+		this->contenuMatrice.at(i).resize(colonne);
+
+	}
+}
+
+template<typename T>
+bool Matrice<T>::estVide() {
+	return this->contenuMatrice.size() = 0;
+}
+
+template<typename T>
+bool Matrice<T>::estCarree() {
+
+	if (!this->estVide()) {
+		if (this->estReguliere()) {
+
+			return this->size() == this->at(0).size();
+
+		}
+	}
+}
+
+template<typename T>
+bool Matrice<T>::estReguliere() {
+
+	if (!this->estVide()) {
+		for (size_t i = 1; i < this->contenuMatrice.size(); i++) {
+			if (this->contenuMatrice.at(i - 1).size()
+					!= this->contenuMatrice.at(i).size()) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 #endif // MATRICEIMPL_H

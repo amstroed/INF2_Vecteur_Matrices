@@ -7,33 +7,34 @@
 template <typename T>
 class Matrice
 {
-	friend std::ostream& operator <<(std::ostream& os, const Matrice<T>& matrice);
+	//std::ostream& operator <<(std::ostream& os, const Matrice<T>& matrice);
 
 public:
 
-	Matrice(){}
-	Matrice(unsigned lignes){}
-	Matrice(unsigned lignes, unsigned colonnes){}
+	Matrice();
+	Matrice(unsigned lignes);
+	Matrice(unsigned lignes, unsigned colonnes);
 
-	Vecteur<T> at(unsigned n);
+	vector<T> at(unsigned n);
 	unsigned size();
 	void resize(unsigned taille);
+	void resize(unsigned taille, unsigned colonne);
 
 	bool estVide();
-	bool estReguliere();
 	bool estCarree();
+	bool estReguliere();
 
-	Vecteur<T> sommeLigne();
-	Vecteur<T> sommeColonne();
-	Vecteur<T> sommeDiagonaleGD();
-	Vecteur<T> sommeDiagonaleDG();
+	vector<T> sommeLigne();
+	vector<T> sommeColonne();
+	vector<T> sommeDiagonaleGD();
+	vector<T> sommeDiagonaleDG();
 	
 	Matrice<T> operator*(T valeur);
 	Matrice<T> operator*(Matrice matrice);
 	Matrice<T> operator+(Matrice matrice);
 
 private:
-	Vecteur<Vecteur<T>> contenuMatrice;
+	std::vector<std::vector<T>> contenuMatrice;
 };
 
 
