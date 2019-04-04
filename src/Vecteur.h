@@ -10,8 +10,14 @@ class Vecteur
 private :
 	vector<T> contenuVecteur;
 public :
-	Vecteur(vector<T>);
-	Vecteur(size_t n);
+	Vecteur(vector<T>)
+	{
+
+	}
+	Vecteur(size_t n)
+	{
+
+	}
 
 	T at(n);
 	void resize(size_t size);
@@ -23,4 +29,5 @@ public :
 	operator - (Vecteur vect);
 };
 
+#include "VecteurImpl.h"
 #endif // VECTEUR_H
