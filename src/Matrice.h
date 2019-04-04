@@ -2,13 +2,15 @@
 #define MATRICE_H
 
 #include <vector>
+#include <iostream>
+#include "Vecteur.h"
 template <typename T>
 class Matrice
 {
-	friend std::ostream& operator <<(std::ostream& os, const Matrice& matrice
-private:
-	Vecteur<Vecteur<T>> contenuMatrice;
-public :
+	friend std::ostream& operator <<(std::ostream& os, const Matrice<T>& matrice);
+
+public:
+
 	Matrice(){}
 	Matrice(unsigned lignes){}
 	Matrice(unsigned lignes, unsigned colonnes){}
@@ -26,9 +28,14 @@ public :
 	Vecteur<T> sommeDiagonaleGD();
 	Vecteur<T> sommeDiagonaleDG();
 	
-	operator * (T valeur);
-	operator * (Matrice matrice);
-	operator + (Matrice matrice);
+	Matrice<T> operator*(T valeur);
+	Matrice<T> operator*(Matrice matrice);
+	Matrice<T> operator+(Matrice matrice);
+
+private:
+	Vecteur<Vecteur<T>> contenuMatrice;
 };
 
+
+#include "MatriceImpl.h"
 #endif // MATRICE_H
