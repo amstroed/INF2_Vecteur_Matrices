@@ -1,19 +1,17 @@
 #ifdef MATRICE_H
 #define MATRICE_H
 
-#include <vector>;
-#include "Vecteur.h"
-
+#include <vector>
 template <typename T>
-class Vecteur
+class Matrice
 {
 	friend std::ostream& operator <<(std::ostream& os, const Matrice& matrice
 private:
 	Vecteur<Vecteur<T>> contenuMatrice;
 public :
-	Matrice();
-	Matrice(unsigned lignes);
-	Matrice(unsigned lignes, unsigned colonnes);
+	Matrice(){}
+	Matrice(unsigned lignes){}
+	Matrice(unsigned lignes, unsigned colonnes){}
 
 	Vecteur<T> at(unsigned n);
 	unsigned size();
