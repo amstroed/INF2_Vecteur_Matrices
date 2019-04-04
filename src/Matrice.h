@@ -4,22 +4,27 @@
 #include <vector>
 #include <iostream>
 #include "Vecteur.h"
+
+template<typename T> class Matrice;
+template<typename T>
+std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
+	cout << "[";
+	for (size_t i = 0; i < matrice.size(); i++) {
+		cout << "[";
+		for (size_t j = 0; j < matrice.at(i).size(); j++) {
+			std::cout << matrice.at(i).at(j) << ", ";
+		}
+		std::cout << "]";
+	}
+	std::cout << "]" << std::endl;
+	return os;
+}
+
 template<typename T>
 class Matrice {
 
-//	friend std::ostream& operator<<(std::ostream& os,
-//			const Matrice<T>& matrice) {
-//		cout << "[";
-//		for (size_t i = 0; i < contenuMatrice.size(); i++) {
-//			cout << "[";
-//			for (size_t j = 0; j < contenuMatrice.t(i).size(); j++) {
-//				std::cout << contenuMatrice.at(i).at(j) << ", ";
-//			}
-//			std::cout << "], ";
-//		}
-//		std::cout << "] " << std::endl;
-//		return os;
-//	}
+	friend std::ostream& operator<<<T>(std::ostream& os,
+			Matrice<T>& matrice);
 
 public:
 
@@ -27,8 +32,8 @@ public:
 	Matrice(unsigned lignes);
 	Matrice(unsigned lignes, unsigned colonnes);
 
-	vector<T> at(unsigned n);
-	size_t size();
+	vector<T>& at(unsigned n);
+	size_t size() const;
 	void resize(unsigned taille);
 	void resize(unsigned taille, unsigned colonne);
 

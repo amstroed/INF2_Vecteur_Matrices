@@ -24,14 +24,14 @@ Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) {
 }
 
 template<typename T>
-vector<T> Matrice<T>::at(unsigned n) {
+vector<T>& Matrice<T>::at(unsigned n) {
 
 	return this->contenuMatrice.at(n);
 
 }
 
 template<typename T>
-size_t Matrice<T>::size() {
+size_t Matrice<T>::size() const{
 
 	return this->contenuMatrice.size();
 
