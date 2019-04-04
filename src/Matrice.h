@@ -1,4 +1,4 @@
-#ifdef MATRICE_H
+#ifndef MATRICE_H
 #define MATRICE_H
 
 #include <vector>

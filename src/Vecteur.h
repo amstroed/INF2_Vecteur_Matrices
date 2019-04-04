@@ -1,4 +1,4 @@
-#ifdef VECTEUR_H
+#ifndef VECTEUR_H
 #define VECTEUR_H
 
 #include <vector>;
