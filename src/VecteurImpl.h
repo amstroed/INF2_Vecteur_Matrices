@@ -8,7 +8,7 @@
 using namespace std;
 
 template <typename T>
-Vecteur T at(n)
+Vecteur<T> at(unsigned n)
 {
 
 }
@@ -25,20 +25,24 @@ T somme()
 }
 
 template <typename T>
-operator * (T valeur)
+Vecteur<T> Vecteur<T>::operator*(T valeur)
 {
 
 }
 
-operator * (Vecteur vect)
+template <typename T>
+Vecteur<T> Vecteur<T>::operator * (Vecteur vect)
 {
 
 }
-operator + (Vecteur vect)
+template <typename T>
+Vecteur<T> Vecteur<T>::operator + (Vecteur vect)
 {
 
 }
-operator - (Vecteur vect)
+
+template <typename T>
+Vecteur<T> Vecteur<T>::operator - (Vecteur vect)
 {
 
 }
