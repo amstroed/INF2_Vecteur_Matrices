@@ -47,5 +47,4 @@ Vecteur<T> Vecteur<T>::operator - (Vecteur vect)
 
 }
 
-
 #endif // VECTEURIMPL_H
