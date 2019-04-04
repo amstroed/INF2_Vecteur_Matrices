@@ -5,5 +5,6 @@ using namespace std;
 #include "Vecteur.h"
 
 int main() {
+Matrice<int> lul(3,4);
 
 }
