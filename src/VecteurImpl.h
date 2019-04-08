@@ -9,7 +9,14 @@ using namespace std;
 
 template<typename T>
 T& Vecteur<T>::at(unsigned n) {
-	return this->contenuVecteur.at(n);
+	try
+	{
+		return this->contenuVecteur.at(n);
+	}
+	catch (out_of_range)
+	{
+		throw Erreur_taille(1, "Element en dehors des limites");
+	}
 }
 
 template<typename T>
@@ -41,7 +48,7 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator*(T valeur) {
 	Vecteur<T> temp(this->contenuVecteur);
 	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-		temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * valeur;
+		temp.contenuVecteur.at(i) *= valeur;
 	}
 	return temp;
 }
@@ -53,19 +60,19 @@ Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 		//throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) *= vect.contenuVecteur.at(i);
 		}
 	}
 	return temp;
 }
 template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
-	Vecteur<T> temp = this;
+	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
+		//throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) + vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) += vect.contenuVecteur.at(i);
 		}
 	}
 	return temp;
@@ -73,12 +80,12 @@ Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
-	Vecteur<T> temp = this;
+	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
+		//throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) - vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) -= vect.contenuVecteur.at(i);
 		}
 	}
 	return temp;
