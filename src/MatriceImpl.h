@@ -4,36 +4,36 @@
 #include <vector>
 #include "Vecteur.h"
 
-
 template<typename T>
 Matrice<T>::Matrice() {
 }
 
 template<typename T>
-Matrice<T>::Matrice(unsigned lignes) {
+Matrice<T>::Matrice(unsigned lignes) :
+		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
+}
 
-	this->resize(lignes);
+template<typename T>
+Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
+		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
+
+	for (size_t i = 0; i < contenuMatrice.size(); i++) {
+		this->at(i).resize(colonnes);
+	}
 
 }
 
 template<typename T>
-Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) {
+Vecteur<T>& Matrice<T>::at(unsigned n) {
 
-	this->resize(lignes, colonnes);
-
-}
-
-template<typename T>
-vector<T>& Matrice<T>::at(unsigned n) {
-
-	return this->contenuMatrice.at(n);
+	return contenuMatrice.at(n);
 
 }
 
 template<typename T>
-size_t Matrice<T>::size() const{
+size_t Matrice<T>::size() const {
 
-	return this->contenuMatrice.size();
+	return contenuMatrice.size();
 
 }
 
@@ -88,8 +88,8 @@ bool Matrice<T>::estReguliere() {
 }
 
 template<typename T>
-vector<T> Matrice<T>::sommeLigne() {
-	vector < T > resultat(this->size());
+Vecteur<T> Matrice<T>::sommeLigne() {
+	Vecteur < T > resultat(this->size());
 	T temp;
 	for (size_t i = 0; i < this->size(); i++) {
 		temp = 0;
@@ -102,8 +102,8 @@ vector<T> Matrice<T>::sommeLigne() {
 }
 
 template<typename T>
-vector<T> Matrice<T>::sommeColonne() {
-	vector < T > resultat(this->size());
+Vecteur<T> Matrice<T>::sommeColonne() {
+	Vecteur < T > resultat(this->size());
 	T temp;
 	for (size_t j = 0; j < this->at(0).size(); j++) {
 		temp = 0;
@@ -135,8 +135,8 @@ T Matrice<T>::sommeDiagonaleDG() {
 }
 
 template<typename T>
-Matrice<T>  Matrice<T>::operator*(T valeur) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
+Matrice<T> Matrice<T>::operator*(T valeur) {
+	Matrice < T > resultat(this->size(), this->at(0).size());
 	for (size_t i = 0; i < this->size(); i++) {
 		for (size_t j = 0; j < this->at(i).size(); j++) {
 			resultat.at(i).at(j) = this->at(i).at(j) * valeur;
@@ -147,25 +147,25 @@ Matrice<T>  Matrice<T>::operator*(T valeur) {
 
 template<typename T>
 Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
-		for (size_t i = 0; i < this->size(); i++) {
-			for (size_t j = 0; j < this->at(i).size(); j++) {
-				resultat.at(i).at(j) = this->at(i).at(j) * matrice.at(i).at(j);
-			}
+	Matrice < T > resultat(this->size(), this->at(0).size());
+	for (size_t i = 0; i < this->size(); i++) {
+		for (size_t j = 0; j < this->at(i).size(); j++) {
+			resultat.at(i).at(j) = this->at(i).at(j) * matrice.at(i).at(j);
 		}
-		return resultat;
+	}
+	return resultat;
 
 }
 
 template<typename T>
-Matrice<T>  Matrice<T>::operator+(Matrice<T> matrice) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
-			for (size_t i = 0; i < this->size(); i++) {
-				for (size_t j = 0; j < this->at(i).size(); j++) {
-					resultat.at(i).at(j) = this->at(i).at(j) + matrice.at(i).at(j);
-				}
-			}
-			return resultat;
+Matrice<T> Matrice<T>::operator+(Matrice<T> matrice) {
+	Matrice < T > resultat(this->size(), this->at(0).size());
+	for (size_t i = 0; i < this->size(); i++) {
+		for (size_t j = 0; j < this->at(i).size(); j++) {
+			resultat.at(i).at(j) = this->at(i).at(j) + matrice.at(i).at(j);
+		}
+	}
+	return resultat;
 }
 
 #endif // MATRICEIMPL_H

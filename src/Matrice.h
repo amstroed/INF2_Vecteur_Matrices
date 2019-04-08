@@ -23,8 +23,7 @@ std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
 template<typename T>
 class Matrice {
 
-	friend std::ostream& operator<<<T>(std::ostream& os,
-			Matrice<T>& matrice);
+	friend std::ostream& operator<<<T>(std::ostream& os, Matrice<T>& matrice);
 
 public:
 
@@ -32,7 +31,7 @@ public:
 	Matrice(unsigned lignes);
 	Matrice(unsigned lignes, unsigned colonnes);
 
-	vector<T>& at(unsigned n);
+	Vecteur<T>& at(unsigned n);
 	size_t size() const;
 	void resize(unsigned taille);
 	void resize(unsigned taille, unsigned colonne);
@@ -41,8 +40,8 @@ public:
 	bool estCarree();
 	bool estReguliere();
 
-	vector<T> sommeLigne();
-	vector<T> sommeColonne();
+	Vecteur<T> sommeLigne();
+	Vecteur<T> sommeColonne();
 	T sommeDiagonaleGD();
 	T sommeDiagonaleDG();
 
@@ -51,7 +50,7 @@ public:
 	Matrice<T> operator+(Matrice<T> matrice);
 
 private:
-	std::vector<std::vector<T>> contenuMatrice;
+	Vecteur<Vecteur<T>> contenuMatrice;
 };
 
 #include "MatriceImpl.h"
