@@ -2,6 +2,7 @@
 #define MATRICEIMPL_H
 
 #include <vector>
+#include "Erreurs.h"
 #include "Vecteur.h"
 
 template<typename T>
@@ -136,6 +137,11 @@ T Matrice<T>::sommeDiagonaleDG() {
 
 template<typename T>
 Matrice<T> Matrice<T>::operator*(T valeur) {
+
+	if(true){
+				throw Erreur_taille(1,"lulz");
+		}
+
 	Matrice < T > resultat(this->size(), this->at(0).size());
 	for (size_t i = 0; i < this->size(); i++) {
 		for (size_t j = 0; j < this->at(i).size(); j++) {

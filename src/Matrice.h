@@ -10,11 +10,8 @@ template<typename T>
 std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
 	cout << "[";
 	for (size_t i = 0; i < matrice.size(); i++) {
-		cout << "[";
-		for (size_t j = 0; j < matrice.at(i).size(); j++) {
-			std::cout << matrice.at(i).at(j) << ", ";
-		}
-		std::cout << "]";
+			std::cout << matrice.at(i);
+
 	}
 	std::cout << "]" << std::endl;
 	return os;
