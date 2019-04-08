@@ -2,6 +2,7 @@
 #define VECTEURIMPL_H
 
 #include "Vecteur.h"
+#include "Erreurs.h"
 #include <vector>
 
 using namespace std;
@@ -38,44 +39,49 @@ T Vecteur<T>::somme() const {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator*(T valeur) {
+	vecteur<T> temp = this;
 	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-		this->contenuVecteur.at(i) *= valeur;
+		temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * valeur;
 	}
+	return temp;
 }
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
+	Vecteur<T> temp = this;
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//a definir
-		//throw();
+		throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			this->contenuVecteur.at(i) *= vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * vect.contenuVecteur.at(i);
 		}
 	}
+	return temp;
 }
 template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
+	Vecteur<T> temp = this;
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//a definir
-		//throw();
+		throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			this->contenuVecteur.at(i) += vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) + vect.contenuVecteur.at(i);
 		}
 	}
+	return temp;
 }
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
+	Vecteur<T> temp = this;
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//a definir
-		//throw();
+		throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-			this->contenuVecteur.at(i) -= vect.contenuVecteur.at(i);
+			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) - vect.contenuVecteur.at(i);
 		}
 	}
+	return temp;
 }
 
 #endif // VECTEURIMPL_H
