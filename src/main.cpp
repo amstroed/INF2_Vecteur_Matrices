@@ -7,7 +7,7 @@ int main() {
 	Matrice<int> lol(3, 4);
 	vector<int> lal = { 2, 3, 4, 5 };
 	Vecteur<int> lel = lal;
-	cout << lel;
+	cout << lel << endl;
 	lul.at(2) = lel;
 	lol.at(2) = lel;
 	lul.at(0).at(2) = 213;

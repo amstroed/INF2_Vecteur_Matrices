@@ -39,7 +39,7 @@ T Vecteur<T>::somme() const {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator*(T valeur) {
-	vecteur<T> temp = this;
+	Vecteur<T> temp(this->contenuVecteur);
 	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 		temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * valeur;
 	}
@@ -48,9 +48,9 @@ Vecteur<T> Vecteur<T>::operator*(T valeur) {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
-	Vecteur<T> temp = this;
+	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
+		//throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) = this->contenuVecteur.at(i) * vect.contenuVecteur.at(i);
