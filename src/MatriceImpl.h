@@ -27,6 +27,10 @@ Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
 template<typename T>
 Vecteur<T>& Matrice<T>::at(unsigned n) {
 
+	if(n >= this->size()){
+		//throw out of range exept
+	}
+
 	return contenuMatrice.at(n);
 
 }
@@ -39,7 +43,8 @@ size_t Matrice<T>::size() const {
 }
 
 template<typename T>
-void Matrice<T>::resize(unsigned int taille) {
+void Matrice<T>::resize(unsigned taille) {
+
 
 	this->contenuMatrice.resize(taille);
 
@@ -138,15 +143,10 @@ T Matrice<T>::sommeDiagonaleDG() {
 template<typename T>
 Matrice<T> Matrice<T>::operator*(T valeur) {
 
-	if(true){
-				throw Erreur_taille(1,"lulz");
-		}
-
 	Matrice < T > resultat(this->size(), this->at(0).size());
 	for (size_t i = 0; i < this->size(); i++) {
-		for (size_t j = 0; j < this->at(i).size(); j++) {
-			resultat.at(i).at(j) = this->at(i).at(j) * valeur;
-		}
+			resultat.at(i) = this->at(i) * valeur;
+
 	}
 	return resultat;
 }
@@ -155,9 +155,8 @@ template<typename T>
 Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
 	Matrice < T > resultat(this->size(), this->at(0).size());
 	for (size_t i = 0; i < this->size(); i++) {
-		for (size_t j = 0; j < this->at(i).size(); j++) {
-			resultat.at(i).at(j) = this->at(i).at(j) * matrice.at(i).at(j);
-		}
+			resultat.at(i) = this->at(i) * matrice.at(i);
+
 	}
 	return resultat;
 
