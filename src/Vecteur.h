@@ -7,7 +7,16 @@
 template<typename T> class Vecteur;
 template<typename T>
 std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
-	vect.contenuVecteur.at(0);
+	os << "[";
+	for (size_t i = 0; i < vect.contenuVecteur.size(); ++i)
+	{
+		os << vect.contenuVecteur.at(i);
+		if (i != vect.contenuVecteur.size() - 1)
+		{
+			os << ", ";
+		}
+	}
+	os << "]";
 	return os;
 }
 
