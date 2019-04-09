@@ -19,10 +19,10 @@ T& Vecteur<T>::at(unsigned n) {
 	}
 }
 
-template<typename T>
-T Vecteur<T>::at(size_t n) const {
-
-}
+//template<typename T>
+//T Vecteur<T>::at(size_t n) const {
+//
+//}
 
 template<typename T>
 void Vecteur<T>::resize(size_t nouvelleCapacite) {
@@ -31,7 +31,7 @@ void Vecteur<T>::resize(size_t nouvelleCapacite) {
 }
 
 template<typename T>
-unsigned Vecteur<T>::size() const {
+unsigned Vecteur<T>::size() const noexcept{
 	return this->contenuVecteur.size();
 }
 
