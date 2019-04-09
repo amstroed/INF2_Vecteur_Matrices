@@ -25,6 +25,7 @@ class Matrice {
 public:
 
 	Matrice();
+	Matrice(const Matrice<T>& matrice);
 	Matrice(unsigned lignes);
 	Matrice(unsigned lignes, unsigned colonnes);
 

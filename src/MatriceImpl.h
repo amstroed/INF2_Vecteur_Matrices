@@ -5,8 +5,14 @@
 #include "Erreurs.h"
 #include "Vecteur.h"
 
+const string FILENAMEMATRICE = "MatriceImpl.h";
+
 template<typename T>
 Matrice<T>::Matrice() {
+}
+
+template<typename T>
+Matrice<T>::Matrice(const Matrice<T>& matrice)  : contenuMatrice(matrice.contenuMatrice){
 }
 
 template<typename T>
@@ -27,10 +33,9 @@ Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
 template<typename T>
 Vecteur<T>& Matrice<T>::at(unsigned n) {
 
-
-	try{
-	return contenuMatrice.at(n);
-	}catch(Erreur_taille){
+	try {
+		return contenuMatrice.at(n);
+	} catch (Erreur_taille&) {
 		throw;
 	}
 
@@ -45,7 +50,6 @@ size_t Matrice<T>::size() const {
 
 template<typename T>
 void Matrice<T>::resize(unsigned taille) {
-
 
 	this->contenuMatrice.resize(taille);
 
@@ -144,9 +148,9 @@ T Matrice<T>::sommeDiagonaleDG() {
 template<typename T>
 Matrice<T> Matrice<T>::operator*(T valeur) {
 
-	Matrice < T > resultat(this->size(), this->at(0).size());
+	Matrice < T > resultat(*this);
 	for (size_t i = 0; i < this->size(); i++) {
-			resultat.at(i) = this->at(i) * valeur;
+		resultat.at(i) = this->at(i) * valeur;
 
 	}
 	return resultat;
@@ -154,9 +158,20 @@ Matrice<T> Matrice<T>::operator*(T valeur) {
 
 template<typename T>
 Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
-	Matrice < T > resultat(this->size(), this->at(0).size());
+
+	if (this->size() != matrice.size()) {
+		throw Operation_Matrices_Differentes(
+				"Multiplication entre des matrices differentes", FILENAMEMATRICE);
+	}
 	for (size_t i = 0; i < this->size(); i++) {
-			resultat.at(i) = this->at(i) * matrice.at(i);
+		if (this->at(i).size() != matrice.at(i).size()) {
+			throw Operation_Matrices_Differentes(
+					"Multiplication entre des matrices differentes", FILENAMEMATRICE);
+		}
+	}
+	Matrice < T > resultat(*this);
+	for (size_t i = 0; i < this->size(); i++) {
+		resultat.at(i) = this->at(i) * matrice.at(i);
 
 	}
 	return resultat;
@@ -164,8 +179,20 @@ Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
 }
 
 template<typename T>
+
 Matrice<T> Matrice<T>::operator+(Matrice<T> matrice) {
-	Matrice < T > resultat(this->size(), this->at(0).size());
+	if (this->size() != matrice.size()) {
+			throw Operation_Matrices_Differentes(
+					"Addition entre des matrices differentes", FILENAMEMATRICE);
+		}
+		for (size_t i = 0; i < this->size(); i++) {
+			if (this->at(i).size() != matrice.at(i).size()) {
+				throw Operation_Matrices_Differentes(
+						"Addition entre des matrices differentes", FILENAMEMATRICE);
+			}
+		}
+
+	Matrice < T > resultat(this);
 	for (size_t i = 0; i < this->size(); i++) {
 		for (size_t j = 0; j < this->at(i).size(); j++) {
 			resultat.at(i).at(j) = this->at(i).at(j) + matrice.at(i).at(j);

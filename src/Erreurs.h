@@ -6,12 +6,12 @@
  */
  /*
  ---------------------------------------------------------------------------------- -
-	 Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+	 Laboratoire : Gï¿½Nï¿½RICITï¿½ ET EXCEPTIONS
 	 Fichier : Erreurs.h
-	 Auteur(s) : Loïc Geinoz, Teo Ferrari
+	 Auteur(s) : Loï¿½c Geinoz, Teo Ferrari
 	 Date : 09.04.2019
 
-	 But : Définition des différentes classes d'erreur utilisées par les classes
+	 But : Dï¿½finition des diffï¿½rentes classes d'erreur utilisï¿½es par les classes
 		   Vecteur et Matrice
 	 ---------------------------------------------------------------------------------- -
  */
@@ -24,30 +24,34 @@
 #include <stdexcept>
 #include <string>
 
-class Depassement_Capacite : public std::logic_error  {
+class Depassement_Capacite: public std::logic_error {
 public:
-		explicit Depassement_Capacite(const string& what, const string& file) : logic_error (what){
-			cout << "Fichier : " << file << endl;
-			cout << "Erreur : " << what << endl;
-		}
-		explicit Depassement_Capacite(const char* what, const string& file) : logic_error (what){
-			cout << "Fichier : " << file << endl;
-			cout << "Erreur : " << what << endl;
-		}
+	explicit Depassement_Capacite(const string& what, const string& file) :
+			logic_error(what) {
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+	explicit Depassement_Capacite(const char* what, const string& file) :
+			logic_error(what) {
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
 
 };
 
-class Erreur_taille : public std::logic_error  {
+class Erreur_taille: public std::logic_error {
 public:
-		explicit Erreur_taille(const string& what, const string& file) : logic_error (what){
+	explicit Erreur_taille(const string& what, const string& file) :
+			logic_error(what) {
 
-			cout << "Fichier : " << file << endl;
-			cout << "Erreur : " << what << endl;
-		}
-		explicit Erreur_taille(const char* what, const string& file) : logic_error (what){
-			cout << "Fichier : " << file << endl;
-			cout << "Erreur : " << what << endl;
-		}
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+	explicit Erreur_taille(const char* what, const string& file) :
+			logic_error(what) {
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
 };
 
 class Erreur_vecteurVide : public std::logic_error {
@@ -76,6 +80,22 @@ public:
 	}
 };
 
+
+
+
+class Operation_Matrices_Differentes: public std::logic_error {
+public:
+	explicit Operation_Matrices_Differentes(const string& what, const string& file) : logic_error (what) {
+
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+	explicit Operation_Matrices_Differentes(const char* what, const string& file) : logic_error (what) {
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+
+};
 
 
 #endif /* ERREURS_H_ */
