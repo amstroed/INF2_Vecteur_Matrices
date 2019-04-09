@@ -5,6 +5,8 @@
 #include "Erreurs.h"
 #include <vector>
 
+const string FILENAME = "VecteurImpl.h";
+
 using namespace std;
 
 template<typename T>
@@ -15,7 +17,7 @@ T& Vecteur<T>::at(unsigned n) {
 	}
 	catch (out_of_range)
 	{
-		throw Erreur_taille("Element en dehors des limites");
+		throw Erreur_taille("Element en dehors des limites", FILENAME);
 	}
 }
 
@@ -57,7 +59,7 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
+		throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille", FILENAME);
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) *= vect.contenuVecteur.at(i);
@@ -69,7 +71,7 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
+		throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille", FILENAME);
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) += vect.contenuVecteur.at(i);
@@ -82,7 +84,7 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
 	Vecteur<T> temp(this->contenuVecteur);
 	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		//throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
+		throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille", FILENAME);
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) -= vect.contenuVecteur.at(i);
