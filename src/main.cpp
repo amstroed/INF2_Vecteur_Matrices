@@ -9,6 +9,7 @@ int main() {
 	Vecteur<int> lel = lal;
 	cout << lel << endl;
 	lul.at(2) = lel;
+	lul.at(222);
 	lol.at(2) = lel;
 	lul.at(0).at(2) = 213;
 	lol.at(0).at(2) = 213;

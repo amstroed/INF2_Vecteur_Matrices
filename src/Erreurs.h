@@ -12,17 +12,22 @@
 #include <cstdlib>
 #include <stdexcept>
 
+class Depassement_Capacite : public std::logic_error  {
+public:
+		explicit Depassement_Capacite(const string& what) : logic_error (what){
+
+		}
+		explicit Depassement_Capacite(const char* what) : logic_error (what){}
+
+};
+
 class Erreur_taille : public std::logic_error  {
 public:
-   Erreur_taille(int no, const string& msg="") noexcept
-   : logic_error(msg), no(no) {};
+		explicit Erreur_taille(const string& what) : logic_error (what){
 
-   int noErreur () const noexcept{
-      return no;
-   };
 
-private:
-   int no;
+		}
+		explicit Erreur_taille(const char* what) : logic_error (what){}
 
 };
 

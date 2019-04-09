@@ -15,7 +15,7 @@ T& Vecteur<T>::at(unsigned n) {
 	}
 	catch (out_of_range)
 	{
-		throw Erreur_taille(1, "Element en dehors des limites");
+		throw Erreur_taille("Element en dehors des limites");
 	}
 }
 

@@ -27,11 +27,12 @@ Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
 template<typename T>
 Vecteur<T>& Matrice<T>::at(unsigned n) {
 
-	if(n >= this->size()){
-		//throw out of range exept
-	}
 
+	try{
 	return contenuMatrice.at(n);
+	}catch(Erreur_taille){
+		throw;
+	}
 
 }
 
