@@ -83,14 +83,14 @@ public:
 
 
 
-class Operation_Matrices_Differentes: public std::logic_error {
+class Erreur_Forme_Matrice: public std::logic_error {
 public:
-	explicit Operation_Matrices_Differentes(const string& what, const string& file) : logic_error (what) {
+	explicit Erreur_Forme_Matrice(const string& what, const string& file) : logic_error (what) {
 
 		cout << "Fichier : " << file << endl;
 		cout << "Erreur : " << what << endl;
 	}
-	explicit Operation_Matrices_Differentes(const char* what, const string& file) : logic_error (what) {
+	explicit Erreur_Forme_Matrice(const char* what, const string& file) : logic_error (what) {
 		cout << "Fichier : " << file << endl;
 		cout << "Erreur : " << what << endl;
 	}

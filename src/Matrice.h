@@ -7,7 +7,7 @@
 
 template<typename T> class Matrice;
 template<typename T>
-std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
+std::ostream& operator<<(std::ostream& os,Matrice<T>& matrice) {
 	cout << "[";
 	for (size_t i = 0; i < matrice.size(); i++) {
 			std::cout << matrice.at(i);
@@ -30,13 +30,14 @@ public:
 	Matrice(unsigned lignes, unsigned colonnes);
 
 	Vecteur<T>& at(unsigned n);
-	size_t size() const;
+//	Vecteur<T> at(unsigned n) const;
+	size_t size() const noexcept;
 	void resize(unsigned taille);
 	void resize(unsigned taille, unsigned colonne);
 
-	bool estVide();
-	bool estCarree();
-	bool estReguliere();
+	bool estVide() noexcept;
+	bool estCarree() noexcept;
+	bool estReguliere() noexcept;
 
 	Vecteur<T> sommeLigne();
 	Vecteur<T> sommeColonne();
