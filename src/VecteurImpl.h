@@ -17,19 +17,32 @@ T& Vecteur<T>::at(unsigned n) {
 	}
 	catch (out_of_range)
 	{
-		throw Erreur_taille("Element en dehors des limites", FILENAME);
+		throw Depassement_Capacite("Element en dehors des limites", FILENAME);
 	}
 }
 
-//template<typename T>
-//T Vecteur<T>::at(size_t n) const {
-//
-//}
+template<typename T>
+T Vecteur<T>::at(size_t n) const {
+	try
+	{
+		return this->contenuVecteur.at(n);
+	}
+	catch (out_of_range)
+	{
+		throw Depassement_Capacite("Element en dehors des limites", FILENAME);
+	}
+}
 
 template<typename T>
 void Vecteur<T>::resize(size_t nouvelleCapacite) {
-
-	this->contenuVecteur.resize(nouvelleCapacite);
+	try
+	{
+		this->contenuVecteur.resize(nouvelleCapacite);
+	}
+	catch (bad_alloc)
+	{
+		throw Erreur_resize("Une erreur est survenue lors du redimensionnement du vecteur", FILENAME);
+	}
 }
 
 template<typename T>
@@ -40,57 +53,82 @@ unsigned Vecteur<T>::size() const noexcept{
 template<typename T>
 T Vecteur<T>::somme() const {
 	T somme = T();
-	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-		somme += this->contenuVecteur.at(i);
+	if (this->contenuVecteur.empty()) {
+		throw Erreur_vecteurVide("Tentative de somme sur un vecteur vide", FILENAME);
 	}
-	return somme;
+	else {
+		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
+			somme += this->contenuVecteur.at(i);
+		}
+		return somme;
+	}
+
 }
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator*(T valeur) {
-	Vecteur<T> temp(this->contenuVecteur);
-	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
-		temp.contenuVecteur.at(i) *= valeur;
+	if (!this->contenuVecteur.empty())
+	{
+		Vecteur<T> temp(this->contenuVecteur);
+		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
+			temp.contenuVecteur.at(i) *= valeur;
+		}
+		return temp;
 	}
-	return temp;
+	else
+	{
+		throw Erreur_vecteurVide("Tentative de multiplication sur un vecteur vide", FILENAME);
+	}
 }
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
-	Vecteur<T> temp(this->contenuVecteur);
-	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
+	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty())
+	{
+		throw Erreur_vecteurVide("Tentative de multiplication sur un vecteur vide", FILENAME);
+	}
+	else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille("Les deux vecteurs devant etre multiplies ne sont pas de la meme taille", FILENAME);
 	} else {
+		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) *= vect.contenuVecteur.at(i);
 		}
+		return temp;
 	}
-	return temp;
 }
 template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
-	Vecteur<T> temp(this->contenuVecteur);
-	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
+	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty())
+	{
+		throw Erreur_vecteurVide("Tentative d'addition sur un vecteur vide", FILENAME);
+	}
+	else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille("Les deux vecteurs devant etre additionnes ne sont pas de la meme taille", FILENAME);
 	} else {
+		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) += vect.contenuVecteur.at(i);
 		}
+		return temp;
 	}
-	return temp;
 }
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
-	Vecteur<T> temp(this->contenuVecteur);
-	if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
+	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty())
+	{
+		throw Erreur_vecteurVide("Tentative de soustraction sur un vecteur vide", FILENAME);
+	}
+	else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille("Les deux vecteurs devant etre soustraits ne sont pas de la meme taille", FILENAME);
 	} else {
+		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			temp.contenuVecteur.at(i) -= vect.contenuVecteur.at(i);
 		}
+		return temp;
 	}
-	return temp;
 }
 
 #endif // VECTEURIMPL_H

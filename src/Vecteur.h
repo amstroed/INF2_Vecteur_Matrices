@@ -39,7 +39,7 @@ public:
 	}
 
 	T& at(size_t n);
-	//T at(size_t n) const;
+	T at(size_t n) const;
 	void resize(size_t size);
 	T somme() const;
 	unsigned size() const noexcept;
