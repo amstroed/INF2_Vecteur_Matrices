@@ -1,3 +1,15 @@
+/*
+---------------------------------------------------------------------------------- -
+	Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+	Fichier : main.cpp
+	Auteur(s) : Loïc Geinoz, Teo Ferrari
+	Date : 09.04.2019
+
+	But : fichier utilisé afin de vérifier et tester les différentes fonctionnalités
+		  développées pour les classes Vecteur et Matrice
+	---------------------------------------------------------------------------------- -
+*/
+
 using namespace std;
 #include "Matrice.h"
 #include "Vecteur.h"

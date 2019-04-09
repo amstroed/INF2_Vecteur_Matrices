@@ -4,6 +4,17 @@
  *  Created on: 8 Apr 2019
  *      Author: Teo
  */
+ /*
+ ---------------------------------------------------------------------------------- -
+	 Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+	 Fichier : Erreurs.h
+	 Auteur(s) : Loïc Geinoz, Teo Ferrari
+	 Date : 09.04.2019
+
+	 But : Définition des différentes classes d'erreur utilisées par les classes
+		   Vecteur et Matrice
+	 ---------------------------------------------------------------------------------- -
+ */
 
 #ifndef ERREURS_H_
 #define ERREURS_H_
