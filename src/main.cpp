@@ -34,5 +34,6 @@ int main() {
 	cout << lul << endl;
 	lul = lol * lul;
 	cout << lul << endl;
+	lul = lol + lul;
 	system("PAUSE");
 }
