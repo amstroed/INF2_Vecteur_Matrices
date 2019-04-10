@@ -7,14 +7,11 @@
 
 template<typename T> class Matrice;
 template<typename T>
-std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
+std::ostream& operator<<(std::ostream& os,Matrice<T>& matrice) {
 	cout << "[";
 	for (size_t i = 0; i < matrice.size(); i++) {
-		cout << "[";
-		for (size_t j = 0; j < matrice.at(i).size(); j++) {
-			std::cout << matrice.at(i).at(j) << ", ";
-		}
-		std::cout << "]";
+			std::cout << matrice.at(i);
+
 	}
 	std::cout << "]" << std::endl;
 	return os;
@@ -23,26 +20,27 @@ std::ostream& operator<<(std::ostream& os, Matrice<T>& matrice) {
 template<typename T>
 class Matrice {
 
-	friend std::ostream& operator<<<T>(std::ostream& os,
-			Matrice<T>& matrice);
+	friend std::ostream& operator<<<T>(std::ostream& os, Matrice<T>& matrice);
 
 public:
 
 	Matrice();
+	Matrice(const Matrice<T>& matrice);
 	Matrice(unsigned lignes);
 	Matrice(unsigned lignes, unsigned colonnes);
 
-	vector<T>& at(unsigned n);
-	size_t size() const;
+	Vecteur<T>& at(unsigned n);
+//	Vecteur<T> at(unsigned n) const;
+	size_t size() const noexcept;
 	void resize(unsigned taille);
 	void resize(unsigned taille, unsigned colonne);
 
-	bool estVide();
-	bool estCarree();
-	bool estReguliere();
+	bool estVide() noexcept;
+	bool estCarree() noexcept;
+	bool estReguliere() noexcept;
 
-	vector<T> sommeLigne();
-	vector<T> sommeColonne();
+	Vecteur<T> sommeLigne();
+	Vecteur<T> sommeColonne();
 	T sommeDiagonaleGD();
 	T sommeDiagonaleDG();
 
@@ -51,7 +49,7 @@ public:
 	Matrice<T> operator+(Matrice<T> matrice);
 
 private:
-	std::vector<std::vector<T>> contenuMatrice;
+	Vecteur<Vecteur<T>> contenuMatrice;
 };
 
 #include "MatriceImpl.h"

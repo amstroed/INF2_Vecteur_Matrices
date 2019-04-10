@@ -2,43 +2,65 @@
 #define MATRICEIMPL_H
 
 #include <vector>
+#include "Erreurs.h"
 #include "Vecteur.h"
 
+const string FILENAMEMATRICE = "MatriceImpl.h";
 
 template<typename T>
 Matrice<T>::Matrice() {
 }
 
 template<typename T>
-Matrice<T>::Matrice(unsigned lignes) {
+Matrice<T>::Matrice(const Matrice<T>& matrice)  : contenuMatrice(matrice.contenuMatrice){
+}
 
-	this->resize(lignes);
+template<typename T>
+Matrice<T>::Matrice(unsigned lignes) :
+		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
+}
+
+template<typename T>
+Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
+		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
+
+	for (size_t i = 0; i < contenuMatrice.size(); i++) {
+		this->at(i).resize(colonnes);
+	}
 
 }
 
 template<typename T>
-Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) {
+Vecteur<T>& Matrice<T>::at(unsigned n) {
 
-	this->resize(lignes, colonnes);
+	try {
+		return contenuMatrice.at(n);
+	} catch (Erreur_taille&) {
+		throw;
+	}
+
+}
+
+//template<typename T>
+//Vecteur<T> Matrice<T>::at(unsigned n) const {
+//
+//	try {
+//		return contenuMatrice.at(n);
+//	} catch (Erreur_taille&) {
+//		throw;
+//	}
+//
+//}
+
+template<typename T>
+size_t Matrice<T>::size() const noexcept{
+
+	return contenuMatrice.size();
 
 }
 
 template<typename T>
-vector<T>& Matrice<T>::at(unsigned n) {
-
-	return this->contenuMatrice.at(n);
-
-}
-
-template<typename T>
-size_t Matrice<T>::size() const{
-
-	return this->contenuMatrice.size();
-
-}
-
-template<typename T>
-void Matrice<T>::resize(unsigned int taille) {
+void Matrice<T>::resize(unsigned taille) {
 
 	this->contenuMatrice.resize(taille);
 
@@ -57,12 +79,12 @@ void Matrice<T>::resize(unsigned taille, unsigned colonne) {
 }
 
 template<typename T>
-bool Matrice<T>::estVide() {
-	return this->contenuMatrice.size() = 0;
+bool Matrice<T>::estVide() noexcept{
+	return (this->contenuMatrice.size() == 0);
 }
 
 template<typename T>
-bool Matrice<T>::estCarree() {
+bool Matrice<T>::estCarree() noexcept{
 
 	if (!this->estVide()) {
 		if (this->estReguliere()) {
@@ -71,10 +93,11 @@ bool Matrice<T>::estCarree() {
 
 		}
 	}
+	return true;
 }
 
 template<typename T>
-bool Matrice<T>::estReguliere() {
+bool Matrice<T>::estReguliere() noexcept{
 
 	if (!this->estVide()) {
 		for (size_t i = 1; i < this->contenuMatrice.size(); i++) {
@@ -88,8 +111,8 @@ bool Matrice<T>::estReguliere() {
 }
 
 template<typename T>
-vector<T> Matrice<T>::sommeLigne() {
-	vector < T > resultat(this->size());
+Vecteur<T> Matrice<T>::sommeLigne() {
+	Vecteur < T > resultat(this->size());
 	T temp;
 	for (size_t i = 0; i < this->size(); i++) {
 		temp = 0;
@@ -102,8 +125,11 @@ vector<T> Matrice<T>::sommeLigne() {
 }
 
 template<typename T>
-vector<T> Matrice<T>::sommeColonne() {
-	vector < T > resultat(this->size());
+Vecteur<T> Matrice<T>::sommeColonne() {
+	if(!this->estReguliere()){
+	throw Erreur_Forme_Matrice("Certaines colonnes sont incompletes",FILENAMEMATRICE);
+}
+	Vecteur < T > resultat(this->size());
 	T temp;
 	for (size_t j = 0; j < this->at(0).size(); j++) {
 		temp = 0;
@@ -118,6 +144,9 @@ vector<T> Matrice<T>::sommeColonne() {
 
 template<typename T>
 T Matrice<T>::sommeDiagonaleGD() {
+	if(!this->estCarree()){
+			throw Erreur_Forme_Matrice("Une matrice non carree n'as pas de diagonale",FILENAMEMATRICE);
+		}
 	T resultat = 0;
 	for (size_t i = 0; i < this->size(); i++) {
 		resultat += this->at(i).at(i);
@@ -127,6 +156,9 @@ T Matrice<T>::sommeDiagonaleGD() {
 
 template<typename T>
 T Matrice<T>::sommeDiagonaleDG() {
+	if(!this->estCarree()){
+		throw Erreur_Forme_Matrice("Une matrice non carree n'as pas de diagonale",FILENAMEMATRICE);
+	}
 	T resultat = 0;
 	for (size_t i = 0; i < this->size(); i++) {
 		resultat += this->at(i).at(this->at(i).size() - i - 1);
@@ -135,37 +167,59 @@ T Matrice<T>::sommeDiagonaleDG() {
 }
 
 template<typename T>
-Matrice<T>  Matrice<T>::operator*(T valeur) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
+Matrice<T> Matrice<T>::operator*(T valeur) {
+
+	Matrice < T > resultat(*this);
 	for (size_t i = 0; i < this->size(); i++) {
-		for (size_t j = 0; j < this->at(i).size(); j++) {
-			resultat.at(i).at(j) = this->at(i).at(j) * valeur;
-		}
+		resultat.at(i) = this->at(i) * valeur;
+
 	}
 	return resultat;
 }
 
 template<typename T>
 Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
-		for (size_t i = 0; i < this->size(); i++) {
-			for (size_t j = 0; j < this->at(i).size(); j++) {
-				resultat.at(i).at(j) = this->at(i).at(j) * matrice.at(i).at(j);
-			}
+
+	if (this->size() != matrice.size()) {
+		throw Erreur_Forme_Matrice(
+				"Multiplication entre des matrices differentes", FILENAMEMATRICE);
+	}
+	for (size_t i = 0; i < this->size(); i++) {
+		if (this->at(i).size() != matrice.at(i).size()) {
+			throw Erreur_Forme_Matrice(
+					"Multiplication entre des matrices differentes", FILENAMEMATRICE);
 		}
-		return resultat;
+	}
+	Matrice < T > resultat(*this);
+	for (size_t i = 0; i < this->size(); i++) {
+		resultat.at(i) = this->at(i) * matrice.at(i);
+
+	}
+	return resultat;
 
 }
 
 template<typename T>
-Matrice<T>  Matrice<T>::operator+(Matrice<T> matrice) {
-	Matrice<T> resultat(this->size(), this->at(0).size());
-			for (size_t i = 0; i < this->size(); i++) {
-				for (size_t j = 0; j < this->at(i).size(); j++) {
-					resultat.at(i).at(j) = this->at(i).at(j) + matrice.at(i).at(j);
-				}
+
+Matrice<T> Matrice<T>::operator+(Matrice<T> matrice) {
+	if (this->size() != matrice.size()) {
+			throw Erreur_Forme_Matrice(
+					"Addition entre des matrices differentes", FILENAMEMATRICE);
+		}
+		for (size_t i = 0; i < this->size(); i++) {
+			if (this->at(i).size() != matrice.at(i).size()) {
+				throw Erreur_Forme_Matrice(
+						"Addition entre des matrices differentes", FILENAMEMATRICE);
 			}
-			return resultat;
+		}
+
+	Matrice < T > resultat(this);
+	for (size_t i = 0; i < this->size(); i++) {
+		for (size_t j = 0; j < this->at(i).size(); j++) {
+			resultat.at(i).at(j) = this->at(i).at(j) + matrice.at(i).at(j);
+		}
+	}
+	return resultat;
 }
 
 #endif // MATRICEIMPL_H
