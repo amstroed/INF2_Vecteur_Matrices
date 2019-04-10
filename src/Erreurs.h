@@ -67,6 +67,19 @@ public:
 	}
 };
 
+class Erreur_matriceVide : public std::logic_error {
+public:
+	explicit Erreur_matriceVide(const string& what, const string& file) : logic_error(what) {
+
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+	explicit Erreur_matriceVide(const char* what, const string& file) : logic_error(what) {
+		cout << "Fichier : " << file << endl;
+		cout << "Erreur : " << what << endl;
+	}
+};
+
 class Erreur_resize : public std::logic_error {
 public:
 	explicit Erreur_resize(const string& what, const string& file) : logic_error(what) {

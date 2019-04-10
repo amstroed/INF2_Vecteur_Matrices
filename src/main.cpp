@@ -15,15 +15,16 @@ using namespace std;
 #include "Vecteur.h"
 
 int main() {
-	Matrice<int> lul(4, 3);
-	Matrice<int> lol(4, 3);
-	vector<int> lal = { 2, 3, 4, 5 };
+	Matrice<int> lul(4,4);
+   Matrice<int> lol(4,4);
+	vector<int> lal = {1,2,3,4};
 	Vecteur<int> lel = lal;
 	cout << lel << endl;
 	lul.at(2) = lel;
 	lol.at(2) = lel;
 	lul.at(0).at(2) = 213;
 	lol.at(0).at(2) = 213;
+	cout << lul << endl;
 
 	cout << lul.sommeLigne() << endl;
 	cout << lul.sommeColonne() << endl;
@@ -35,5 +36,7 @@ int main() {
 	lul = lol * lul;
 	cout << lul << endl;
 	lul = lol + lul;
-	system("PAUSE");
+	cout << lul << endl;
+	lul.resize(3, 3);
+	cout << lul << endl;
 }

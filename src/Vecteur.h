@@ -1,14 +1,14 @@
 /*
----------------------------------------------------------------------------------- -
-	Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
-	Fichier : Vecteur.h
-	Auteur(s) : Loïc Geinoz, Teo Ferrari
-	Date : 09.04.2019
+ ---------------------------------------------------------------------------------- -
+ Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+ Fichier : Vecteur.h
+ Auteur(s) : Loïc Geinoz, Teo Ferrari
+ Date : 09.04.2019
 
-	But : Définition des différentes fonctions de la classe Vecteur ainsi que des 
-		  surcharges d'opérateur et définition et implémenation des constructeurs
-	---------------------------------------------------------------------------------- -
-*/
+ But : Définition des différentes fonctions de la classe Vecteur ainsi que des
+ surcharges d'opérateur et définition et implémenation des constructeurs
+ ---------------------------------------------------------------------------------- -
+ */
 
 #ifndef VECTEUR_H
 #define VECTEUR_H
@@ -21,11 +21,9 @@ template<typename T> class Vecteur;
 template<typename T>
 std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
 	os << "[";
-	for (size_t i = 0; i < vect.contenuVecteur.size(); ++i)
-	{
+	for (size_t i = 0; i < vect.contenuVecteur.size(); ++i) {
 		os << vect.contenuVecteur.at(i);
-		if (i != vect.contenuVecteur.size() - 1)
-		{
+		if (i != vect.contenuVecteur.size() - 1) {
 			os << ", ";
 		}
 	}
