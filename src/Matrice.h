@@ -7,7 +7,7 @@
 
 template<typename T> class Matrice;
 template<typename T>
-std::ostream& operator<<(std::ostream& os,Matrice<T>& matrice) {
+std::ostream& operator<<(std::ostream& os,const Matrice<T>& matrice) {
 	cout << "[";
 	for (size_t i = 0; i < matrice.size(); i++) {
 			std::cout << matrice.at(i);
@@ -20,7 +20,7 @@ std::ostream& operator<<(std::ostream& os,Matrice<T>& matrice) {
 template<typename T>
 class Matrice {
 
-	friend std::ostream& operator<<<T>(std::ostream& os, Matrice<T>& matrice);
+	friend std::ostream& operator<<<T>(std::ostream& os, const Matrice<T>& matrice);
 
 public:
 
@@ -30,7 +30,7 @@ public:
 	Matrice(unsigned lignes, unsigned colonnes);
 
 	Vecteur<T>& at(unsigned n);
-//	Vecteur<T> at(unsigned n) const;
+	Vecteur<T> at(unsigned n) const;
 	size_t size() const noexcept;
 	void resize(unsigned taille);
 	void resize(unsigned taille, unsigned colonne);
