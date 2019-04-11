@@ -2,35 +2,12 @@
 #define MATRICEIMPL_H
 
 #include <vector>
+#include<string>
 #include "Erreurs.h"
 #include "Vecteur.h"
 
 const string FILENAMEMATRICE = "MatriceImpl.h";
 
-template<typename T>
-Matrice<T>::Matrice(){
-
-
-}
-
-template<typename T>
-Matrice<T>::Matrice(const Matrice<T>& matrice) :
-		contenuMatrice(matrice.contenuMatrice) {
-}
-
-template<typename T>
-Matrice<T>::Matrice(unsigned lignes) :
-		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
-}
-
-template<typename T>
-Matrice<T>::Matrice(unsigned lignes, unsigned colonnes) :
-		contenuMatrice(Vecteur < Vecteur < T >> (lignes)) {
-
-	for (size_t i = 0; i < contenuMatrice.size(); i++) {
-		this->at(i).resize(colonnes);
-	}
-}
 
 template<typename T>
 Vecteur<T>& Matrice<T>::at(unsigned n) {
@@ -117,8 +94,9 @@ bool Matrice<T>::estReguliere() noexcept {
 template<typename T>
 Vecteur<T> Matrice<T>::sommeLigne() {
 	if (this->estVide()) {
-		throw Erreur_matriceVide("Tentative d'opération sur une matrice vide",
-				FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative d'opï¿½ration sur une matrice vide");
 	}
 	Vecteur < T > resultat(this->size());
 	T temp;
@@ -135,13 +113,14 @@ Vecteur<T> Matrice<T>::sommeLigne() {
 template<typename T>
 Vecteur<T> Matrice<T>::sommeColonne() {
 	if (this->estVide()) {
-		throw Erreur_matriceVide("Tentative d'opération sur une matrice vide",
-				FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative d'opï¿½ration sur une matrice vide");
 	}
 	if (!(this->estReguliere())) {
 		throw Erreur_Forme_Matrice(
-				"Certaines colonnes sont incompletes dans une matrice irreguliere",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Certaines colonnes sont incompletes dans une matrice irreguliere");
 	}
 	Vecteur < T > resultat(this->at(0).size());
 	T temp;
@@ -158,13 +137,14 @@ Vecteur<T> Matrice<T>::sommeColonne() {
 template<typename T>
 T Matrice<T>::sommeDiagonaleGD() {
 	if (this->estVide()) {
-		throw Erreur_matriceVide("Tentative d'opération sur une matrice vide",
-				FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative d'opï¿½ration sur une matrice vide");
 	}
 	if (!this->estCarree()) {
 		throw Erreur_Forme_Matrice(
-				"Une matrice non carree n'as pas de diagonale",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Une matrice non carree n'as pas de diagonale");
 	}
 	T resultat = 0;
 
@@ -178,13 +158,14 @@ T Matrice<T>::sommeDiagonaleGD() {
 template<typename T>
 T Matrice<T>::sommeDiagonaleDG() {
 	if (this->estVide()) {
-		throw Erreur_matriceVide("Tentative d'opération sur une matrice vide",
-				FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative d'opÃ©ration sur une matrice vide");
 	}
 	if (!this->estCarree()) {
 		throw Erreur_Forme_Matrice(
-				"Une matrice non carree n'as pas de diagonale",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Une matrice non carree n'as pas de diagonale");
 	}
 	T resultat = 0;
 	for (size_t i = 0; i < this->size(); i++) {
@@ -197,7 +178,9 @@ T Matrice<T>::sommeDiagonaleDG() {
 template<typename T>
 Matrice<T> Matrice<T>::operator*(T valeur) {
 	if (this->estVide()) {
-		throw Erreur_matriceVide("Tentative de multiplication sur une matrice vide", FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative de multiplication sur une matrice vide");
 	}
 
 	Matrice < T > resultat(*this);
@@ -215,20 +198,20 @@ template<typename T>
 Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
 	if (this->estVide() || matrice.estVide()) {
 		throw Erreur_matriceVide(
-				"Tentative de multiplication sur une matrice vide",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Tentative de multiplication sur une matrice vide");
 	}
 
 	if (this->size() != matrice.size()) {
 		throw Erreur_Forme_Matrice(
-				"Tentative de multiplication entre des matrices differentes",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Tentative de multiplication entre des matrices differentes");
 	}
 	for (size_t i = 0; i < this->size(); i++) {
 		if (this->at(i).size() != matrice.at(i).size()) {
 			throw Erreur_Forme_Matrice(
-					"Tentative de multiplication entre des matrices differentes",
-					FILENAMEMATRICE);
+					FILENAMEMATRICE
+							+ "::Tentative de multiplication entre des matrices differentes");
 		}
 	}
 	Matrice < T > resultat(*this);
@@ -249,13 +232,14 @@ template<typename T>
 Matrice<T> Matrice<T>::operator+(Matrice<T> matrice) {
 
 	if (this->estVide() || matrice.estVide()) {
-		throw Erreur_matriceVide("Tentative d'addition sur une matrice vide",
-				FILENAMEMATRICE);
+		throw Erreur_matriceVide(
+				FILENAMEMATRICE
+						+ "::Tentative d'addition sur une matrice vide");
 	}
 	if (this->size() != matrice.size()) {
 		throw Erreur_Forme_Matrice(
-				"Tentative d'addition entre des matrices differentes",
-				FILENAMEMATRICE);
+				FILENAMEMATRICE
+						+ "::Tentative d'addition entre des matrices differentes");
 	}
 
 	Matrice < T > resultat(*this);

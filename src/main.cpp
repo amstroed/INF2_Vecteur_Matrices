@@ -15,28 +15,35 @@ using namespace std;
 #include "Vecteur.h"
 
 int main() {
-	Matrice<int> lul(4,4);
-   Matrice<int> lol(4,4);
-	vector<int> lal = {1,2,3,4};
-	Vecteur<int> lel = lal;
-	cout << lel << endl;
-	lul.at(2) = lel;
-	lol.at(2) = lel;
-	lul.at(0).at(2) = 213;
-	lol.at(0).at(2) = 213;
-	cout << lul << endl;
 
-	cout << lul.sommeLigne() << endl;
-	cout << lul.sommeColonne() << endl;
-	cout << lul.sommeDiagonaleGD() << endl;
-	cout << lul.sommeDiagonaleDG() << endl;
-	cout << lul << endl;
-	lul = lul * 3;
-	cout << lul << endl;
-	lul = lol * lul;
-	cout << lul << endl;
-	lul = lol + lul;
-	cout << lul << endl;
-	lul.resize(3, 3);
-	cout << lul << endl;
+	cout << "test de fonctionnement normal:" << endl;
+	Matrice<int> matrice1(4, 4);
+	Matrice<int> matrice2(4, 3);
+	vector<int> vector1 = { 1, 2, 3, 4 };
+	Vecteur<int> vecteur1 = vector1;
+	cout << "cout de vecteur1: " << vecteur1 << endl;
+	matrice1.at(2) = vecteur1;
+	matrice2.at(2) = vecteur1;
+	matrice1.at(0).at(2) = 213;
+	matrice2.at(0).at(2) = 213;
+
+	cout << "cout de matrice 1: " << matrice1 << endl;
+
+	cout << "résultat de sommeLigne sur matrice1: " << matrice1.sommeLigne()
+			<< endl;
+	cout << "résultat de sommeColonne sur matrice1: " << matrice1.sommeColonne()
+			<< endl;
+	cout << "résultat de sommeDiagonaleGD sur matrice1: "
+			<< matrice1.sommeDiagonaleGD() << endl;
+	cout << "résultat de sommeDiagonaleDG sur matrice1: "
+			<< matrice1.sommeDiagonaleDG() << endl;
+	cout << "test de multiplcation avec une constante (3): " << matrice1 * 3
+			<< endl;
+	cout << "test de multiplcation avec une autre matrice(la meme): "
+			<< matrice2 * matrice1 << endl;
+	cout << "test d'addition avec une autre matrice(la meme): "
+			<< matrice2 + matrice1 << endl;
+
+	matrice1.resize(3, 3);
+	cout << "test de resize(3,3): " << matrice1 << endl;
 }

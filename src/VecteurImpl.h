@@ -1,12 +1,12 @@
 /*
  ---------------------------------------------------------------------------------- -
- Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+ Laboratoire : Gï¿½Nï¿½RICITï¿½ ET EXCEPTIONS
  Fichier : VecteurImpl.h
- Auteur(s) : Loïc Geinoz, Teo Ferrari
+ Auteur(s) : Loï¿½c Geinoz, Teo Ferrari
  Date : 09.04.2019
 
- But : Implémenation des différentes fonctions de la classe Vecteur ainsi que des
- surcharges d'opérateur.
+ But : Implï¿½menation des diffï¿½rentes fonctions de la classe Vecteur ainsi que des
+ surcharges d'opï¿½rateur.
  ---------------------------------------------------------------------------------- -
  */
 
@@ -16,8 +16,9 @@
 #include "Vecteur.h"
 #include "Erreurs.h"
 #include <vector>
+#include <string>
 
-const string FILENAME = "VecteurImpl.h";
+const string FILENAMEVECTEUR = "VecteurImpl.h";
 
 using namespace std;
 
@@ -26,7 +27,8 @@ T& Vecteur<T>::at(size_t n) {
 	try {
 		return this->contenuVecteur.at(n);
 	} catch (out_of_range&) {
-		throw Depassement_Capacite("Element en dehors des limites", FILENAME);
+		throw Depassement_Capacite(
+				FILENAMEVECTEUR + "::Element en dehors des limites");
 	}
 }
 
@@ -35,9 +37,10 @@ T Vecteur<T>::at(size_t n) const {
 	try {
 		return this->contenuVecteur.at(n);
 	}
-	//On récupère l'erreur dans le cas où l'utilisateur essaye d'accéder à un élément en dehors des limites
+	//On rï¿½cupï¿½re l'erreur dans le cas oï¿½ l'utilisateur essaye d'accï¿½der ï¿½ un ï¿½lï¿½ment en dehors des limites
 	catch (out_of_range&) {
-		throw Depassement_Capacite("Element en dehors des limites", FILENAME);
+		throw Depassement_Capacite(
+				FILENAMEVECTEUR + "::Element en dehors des limites");
 	}
 }
 
@@ -46,11 +49,11 @@ void Vecteur<T>::resize(size_t nouvelleCapacite) {
 	try {
 		this->contenuVecteur.resize(nouvelleCapacite);
 	}
-	//On récupère l'erreur qui peut survenir dans le cas d'un resize d'un vecteur
+	//On rï¿½cupï¿½re l'erreur qui peut survenir dans le cas d'un resize d'un vecteur
 	catch (bad_alloc&) {
 		throw Erreur_resize(
-				"Une erreur est survenue lors du redimensionnement du vecteur",
-				FILENAME);
+				FILENAMEVECTEUR
+						+ "::Une erreur est survenue lors du redimensionnement du vecteur");
 	}
 }
 
@@ -63,8 +66,8 @@ template<typename T>
 T Vecteur<T>::somme() const {
 	T somme = T();
 	if (this->contenuVecteur.empty()) {
-		throw Erreur_vecteurVide("Tentative de somme sur un vecteur vide",
-				FILENAME);
+		throw Erreur_vecteurVide(
+				(FILENAMEVECTEUR + "::Tentative de somme sur un vecteur vide"));
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			somme += this->contenuVecteur.at(i);
@@ -83,7 +86,8 @@ Vecteur<T> Vecteur<T>::operator*(T valeur) {
 		return temp;
 	} else {
 		throw Erreur_vecteurVide(
-				"Tentative de multiplication sur un vecteur vide", FILENAME);
+				FILENAMEVECTEUR
+						+ "::Tentative de multiplication sur un vecteur vide");
 	}
 }
 
@@ -91,11 +95,12 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
-				"Tentative de multiplication sur un vecteur vide", FILENAME);
+				FILENAMEVECTEUR
+						+ "Tentative de multiplication sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
-				"Les deux vecteurs devant etre multiplies ne sont pas de la meme taille",
-				FILENAME);
+				FILENAMEVECTEUR
+						+ "::Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
@@ -108,12 +113,12 @@ Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
-		throw Erreur_vecteurVide("Tentative d'addition sur un vecteur vide",
-				FILENAME);
+		throw Erreur_vecteurVide(
+				FILENAMEVECTEUR + "::Tentative d'addition sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
-				"Les deux vecteurs devant etre additionnes ne sont pas de la meme taille",
-				FILENAME);
+				FILENAMEVECTEUR
+						+ "::Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
@@ -127,11 +132,12 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
-				"Tentative de soustraction sur un vecteur vide", FILENAME);
+				FILENAMEVECTEUR
+						+ "::Tentative de soustraction sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
-				"Les deux vecteurs devant etre soustraits ne sont pas de la meme taille",
-				FILENAME);
+				FILENAMEVECTEUR
+						+ "::Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
