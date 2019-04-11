@@ -38,31 +38,94 @@ class Vecteur {
 			const Vecteur<T>& vect);
 
 public:
-	//D�finission des constructeurs
+	
+        /**
+	 * @brief Constructeur par défaut. Créée un vecteur vide
+	 */
 	Vecteur() :
 			contenuVecteur(vector < T > (0)) {
 
 	}
+                        
+        /**
+	 * @brief Constructeur avec un vector
+	 */
 	Vecteur(vector<T> vect) :
 			contenuVecteur(vector<T>()) {
 
 		contenuVecteur = vect;
 	}
+        
+        /**
+	 * @brief Constructeur avec un size_t, créé un vecteur avec la taille 
+         * spécifiée
+	 */
 	Vecteur(size_t n) :
 			contenuVecteur(vector < T > (n)) {
 	}
 
-	//D�finission des fonctions publiques
+	/**
+	 * @brief Renvoies le contenu de l'emplacement n du vecteur en écriture
+	 * @param n
+	 * @return
+	 */
 	T& at(size_t n);
+        
+        /**
+	 * @brief Renvoies le contenu de l'emplacement n du vecteur en lecture
+	 * @param n
+	 * @return
+	 */
 	T at(size_t n) const;
+        
+        /**
+	 * @brief Modifie la taille du vecteur
+	 * @param size
+	 */
 	void resize(size_t size);
+        
+        /**
+	 * @brief retourne la somme des éléments du vecteur
+	 * @return
+	 */
 	T somme() const;
+        
+        /**
+	 * @brief Renvoie la taille du vecteur
+	 * @return
+	 */
 	unsigned size() const noexcept;
 
-	//D�finission des surcharges d'op�rateur
+	/**
+	 * @brief retourne un vecteur contenant la multiplication de chaque élément 
+         * du vecteur de départ par une valeur
+	 * @param valeur
+	 * @return
+	 */
 	Vecteur<T> operator*(T valeur);
+        
+        /**
+	 * @brief retourne un vecteur contenant la multiplicaton de chauqe élément 
+         * du vecteur de base avec l'élément au même endroit d'un autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator*(Vecteur vect);
+        
+        /**
+	 * @brief retourne un vecteur contenant l'addition de chauque élément du 
+         * vecteur de base avec l'élément au même endroit de l'autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator+(Vecteur vect);
+        
+        /**
+	 * @brief retourne un vecteur contenant la soustraction de chauque élément du 
+         * vecteur de base avec l'élément au même endroit de l'autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator-(Vecteur vect);
 
 private:
