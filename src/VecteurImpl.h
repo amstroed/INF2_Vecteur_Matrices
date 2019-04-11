@@ -37,7 +37,8 @@ T Vecteur<T>::at(size_t n) const {
 	try {
 		return this->contenuVecteur.at(n);
 	}
-	//On r�cup�re l'erreur dans le cas o� l'utilisateur essaye d'acc�der � un �l�ment en dehors des limites
+	//On r�cup�re l'erreur dans le cas o� l'utilisateur essaye d'acc�der � 
+        //un �l�ment en dehors des limites
 	catch (out_of_range&) {
 		throw Depassement_Capacite(
 				FILENAMEVECTEUR + "::Element en dehors des limites");
@@ -53,7 +54,8 @@ void Vecteur<T>::resize(size_t nouvelleCapacite) {
 	catch (bad_alloc&) {
 		throw Erreur_resize(
 				FILENAMEVECTEUR
-						+ "::Une erreur est survenue lors du redimensionnement du vecteur");
+						+ "::Une erreur est survenue lors du "
+                        "                          redimensionnement du vecteur");
 	}
 }
 
@@ -67,7 +69,8 @@ T Vecteur<T>::somme() const {
 	T somme = T();
 	if (this->contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
-				(FILENAMEVECTEUR + "::Tentative de somme sur un vecteur vide"));
+				(FILENAMEVECTEUR + "::Tentative de somme sur un "
+                                                   "vecteur vide"));
 	} else {
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
 			somme += this->contenuVecteur.at(i);
@@ -87,7 +90,8 @@ Vecteur<T> Vecteur<T>::operator*(T valeur) {
 	} else {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR
-						+ "::Tentative de multiplication sur un vecteur vide");
+						+ "::Tentative de multiplication "
+                                                   "sur un vecteur vide");
 	}
 }
 
@@ -96,11 +100,13 @@ Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR
-						+ "Tentative de multiplication sur un vecteur vide");
+						+ "Tentative de multiplication sur "
+                                                   "un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
 				FILENAMEVECTEUR
-						+ "::Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
+						+ "::Les deux vecteurs devant etre "
+                                       "multiplies ne sont pas de la meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
@@ -114,11 +120,14 @@ template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
-				FILENAMEVECTEUR + "::Tentative d'addition sur un vecteur vide");
+				FILENAMEVECTEUR + "::Tentative d'addition sur "
+                                                  "un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
 				FILENAMEVECTEUR
-						+ "::Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
+						+ "::Les deux vecteurs devant etre "
+                                                   "additionnes ne sont pas de "
+                                                   "la meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
@@ -133,11 +142,14 @@ Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR
-						+ "::Tentative de soustraction sur un vecteur vide");
+						+ "::Tentative de soustraction sur "
+                                                   "un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
 		throw Erreur_taille(
 				FILENAMEVECTEUR
-						+ "::Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
+						+ "::Les deux vecteurs devant etre "
+                                                  "soustraits ne sont pas de la "
+                                                  "meme taille");
 	} else {
 		Vecteur<T> temp(this->contenuVecteur);
 		for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
