@@ -1,12 +1,12 @@
 /*
  ---------------------------------------------------------------------------------- -
- Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+ Laboratoire : Gï¿½Nï¿½RICITï¿½ ET EXCEPTIONS
  Fichier : Vecteur.h
- Auteur(s) : Loïc Geinoz, Teo Ferrari
+ Auteur(s) : Loï¿½c Geinoz, Teo Ferrari
  Date : 09.04.2019
 
- But : Définition des différentes fonctions de la classe Vecteur ainsi que des
- surcharges d'opérateur et définition et implémenation des constructeurs
+ But : Dï¿½finition des diffï¿½rentes fonctions de la classe Vecteur ainsi que des
+ surcharges d'opï¿½rateur et dï¿½finition et implï¿½menation des constructeurs
  ---------------------------------------------------------------------------------- -
  */
 
@@ -16,7 +16,7 @@
 #include <vector>
 #include <iostream>
 
-//Implémentation de l'opérateur <<
+//Implï¿½mentation de l'opï¿½rateur <<
 template<typename T> class Vecteur;
 template<typename T>
 std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
@@ -31,41 +31,104 @@ std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
 	return os;
 }
 
-//Définission de la classe vecteur
+//Dï¿½finission de la classe vecteur
 template<typename T>
 class Vecteur {
 	friend std::ostream& operator<<<T>(std::ostream& os,
 			const Vecteur<T>& vect);
 
 public:
-	//Définission des constructeurs
+	
+        /**
+	 * @brief Constructeur par dÃ©faut. CrÃ©Ã©e un vecteur vide
+	 */
 	Vecteur() :
 			contenuVecteur(vector < T > (0)) {
 
 	}
+                        
+        /**
+	 * @brief Constructeur avec un vector
+	 */
 	Vecteur(vector<T> vect) :
 			contenuVecteur(vector<T>()) {
 		contenuVecteur = vect;
 	}
+        
+        /**
+	 * @brief Constructeur avec un size_t, crÃ©Ã© un vecteur avec la taille 
+         * spÃ©cifiÃ©e
+	 */
 	Vecteur(size_t n) :
 			contenuVecteur(vector < T > (n)) {
 	}
 
-	//Définission des fonctions publiques
+	/**
+	 * @brief Renvoies le contenu de l'emplacement n du vecteur en Ã©criture
+	 * @param n
+	 * @return
+	 */
 	T& at(size_t n);
+        
+        /**
+	 * @brief Renvoies le contenu de l'emplacement n du vecteur en lecture
+	 * @param n
+	 * @return
+	 */
 	T at(size_t n) const;
+        
+        /**
+	 * @brief Modifie la taille du vecteur
+	 * @param size
+	 */
 	void resize(size_t size);
+        
+        /**
+	 * @brief retourne la somme des Ã©lÃ©ments du vecteur
+	 * @return
+	 */
 	T somme() const;
+        
+        /**
+	 * @brief Renvoie la taille du vecteur
+	 * @return
+	 */
 	unsigned size() const noexcept;
 
-	//Définission des surcharges d'opérateur
+	/**
+	 * @brief retourne un vecteur contenant la multiplication de chaque Ã©lÃ©ment 
+         * du vecteur de dÃ©part par une valeur
+	 * @param valeur
+	 * @return
+	 */
 	Vecteur<T> operator*(T valeur);
+        
+        /**
+	 * @brief retourne un vecteur contenant la multiplicaton de chauqe Ã©lÃ©ment 
+         * du vecteur de base avec l'Ã©lÃ©ment au mÃªme endroit d'un autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator*(Vecteur vect);
+        
+        /**
+	 * @brief retourne un vecteur contenant l'addition de chauque Ã©lÃ©ment du 
+         * vecteur de base avec l'Ã©lÃ©ment au mÃªme endroit de l'autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator+(Vecteur vect);
+        
+        /**
+	 * @brief retourne un vecteur contenant la soustraction de chauque Ã©lÃ©ment du 
+         * vecteur de base avec l'Ã©lÃ©ment au mÃªme endroit de l'autre vecteur
+	 * @param vect
+	 * @return
+	 */
 	Vecteur<T> operator-(Vecteur vect);
 
 private:
-	//Définission de la propriété pour les contenu
+	//Dï¿½finission de la propriï¿½tï¿½ pour les contenu
 	vector<T> contenuVecteur;
 };
 #include "VecteurImpl.h"
