@@ -52,6 +52,7 @@ public:
 	 */
 	Vecteur(vector<T> vect) :
 			contenuVecteur(vector<T>()) {
+
 		contenuVecteur = vect;
 	}
         
