@@ -27,7 +27,7 @@ T& Vecteur<T>::at(size_t n) {
 	try {
 		return this->contenuVecteur.at(n);
 	} catch (out_of_range&) {
-		throw Depassement_Capacite(
+		throw Erreur_Hors_limites(
 				FILENAMEVECTEUR + "::Element en dehors des limites");
 	}
 }
@@ -39,7 +39,7 @@ T Vecteur<T>::at(size_t n) const {
 	}
 	//On r�cup�re l'erreur dans le cas o� l'utilisateur essaye d'acc�der � un �l�ment en dehors des limites
 	catch (out_of_range&) {
-		throw Depassement_Capacite(
+		throw Erreur_Hors_limites(
 				FILENAMEVECTEUR + "::Element en dehors des limites");
 	}
 }
@@ -51,9 +51,7 @@ void Vecteur<T>::resize(size_t nouvelleCapacite) {
 	}
 	//On r�cup�re l'erreur qui peut survenir dans le cas d'un resize d'un vecteur
 	catch (bad_alloc&) {
-		throw Erreur_resize(
-				FILENAMEVECTEUR
-						+ "::Une erreur est survenue lors du redimensionnement du vecteur");
+		throw Erreur_allocation();
 	}
 }
 
@@ -98,7 +96,7 @@ Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 				FILENAMEVECTEUR
 						+ "Tentative de multiplication sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille(
+		throw Erreur_taille_vecteur(
 				FILENAMEVECTEUR
 						+ "::Les deux vecteurs devant etre multiplies ne sont pas de la meme taille");
 	} else {
@@ -116,7 +114,7 @@ Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR + "::Tentative d'addition sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille(
+		throw Erreur_taille_vecteur(
 				FILENAMEVECTEUR
 						+ "::Les deux vecteurs devant etre additionnes ne sont pas de la meme taille");
 	} else {
@@ -135,7 +133,7 @@ Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
 				FILENAMEVECTEUR
 						+ "::Tentative de soustraction sur un vecteur vide");
 	} else if (vect.contenuVecteur.size() != this->contenuVecteur.size()) {
-		throw Erreur_taille(
+		throw Erreur_taille_vecteur(
 				FILENAMEVECTEUR
 						+ "::Les deux vecteurs devant etre soustraits ne sont pas de la meme taille");
 	} else {

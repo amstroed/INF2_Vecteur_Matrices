@@ -14,7 +14,7 @@ Vecteur<T>& Matrice<T>::at(unsigned n) {
 
 	try {
 		return contenuMatrice.at(n);
-	} catch (Erreur_taille&) {
+	} catch (Erreur_Hors_limites&) {
 		throw;
 	}
 }
@@ -24,7 +24,7 @@ Vecteur<T> Matrice<T>::at(unsigned n) const {
 
 	try {
 		return contenuMatrice.at(n);
-	} catch (Erreur_taille&) {
+	} catch (Erreur_Hors_limites&) {
 		throw;
 	}
 }
@@ -40,7 +40,7 @@ template<typename T>
 void Matrice<T>::resize(unsigned taille) {
 	try {
 		this->contenuMatrice.resize(taille);
-	} catch (Erreur_resize&) {
+	} catch (Erreur_allocation&) {
 		throw;
 	}
 }
@@ -54,7 +54,7 @@ void Matrice<T>::resize(unsigned taille, unsigned colonne) {
 
 			this->at(i).resize(colonne);
 		}
-	} catch (Erreur_resize&) {
+	} catch (Erreur_allocation&) {
 		throw;
 	}
 }
@@ -222,7 +222,7 @@ Matrice<T> Matrice<T>::operator*(Matrice<T> matrice) {
 		}
 	} catch (Erreur_vecteurVide&) {
 		throw;
-	} catch (Erreur_taille&) {
+	} catch (Erreur_taille_vecteur&) {
 		throw;
 	}
 	return resultat;
@@ -250,7 +250,7 @@ Matrice<T> Matrice<T>::operator+(Matrice<T> matrice) {
 			}
 		} catch (Erreur_vecteurVide&) {
 			throw;
-		} catch (Erreur_taille&) {
+		} catch (Erreur_taille_vecteur&) {
 			throw;
 		}
 	}

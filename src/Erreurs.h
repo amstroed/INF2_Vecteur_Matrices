@@ -22,26 +22,27 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
+#include <exception>
 #include <string>
 
-class Depassement_Capacite: public std::logic_error {
+class Erreur_Hors_limites: public std::out_of_range {
 public:
-	explicit Depassement_Capacite(const std::string& what) :
-			logic_error(what) {
+	explicit Erreur_Hors_limites(const std::string& what) :
+			out_of_range(what) {
 	}
-	explicit Depassement_Capacite(const char* what) :
-			logic_error(what) {
+	explicit Erreur_Hors_limites(const char* what) :
+			out_of_range(what) {
 	}
 
 };
 
-class Erreur_taille: public std::logic_error {
+class Erreur_taille_vecteur: public std::logic_error {
 public:
-	explicit Erreur_taille(const std::string& what) :
+	explicit Erreur_taille_vecteur(const std::string& what) :
 			logic_error(what) {
 
 	}
-	explicit Erreur_taille(const char* what) :
+	explicit Erreur_taille_vecteur(const char* what) :
 			logic_error(what) {
 	}
 };
@@ -64,12 +65,9 @@ public:
 	}
 };
 
-class Erreur_resize : public std::logic_error {
+class Erreur_allocation : public std::bad_alloc{
 public:
-	explicit Erreur_resize(const std::string& what) : logic_error(what) {
-
-	}
-	explicit Erreur_resize(const char* what) : logic_error(what) {
+	explicit Erreur_allocation() : bad_alloc() {
 	}
 };
 

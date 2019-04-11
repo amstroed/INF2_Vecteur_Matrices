@@ -1,12 +1,12 @@
 /*
  ---------------------------------------------------------------------------------- -
- Laboratoire : GÉNÉRICITÉ ET EXCEPTIONS
+ Laboratoire : Gï¿½Nï¿½RICITï¿½ ET EXCEPTIONS
  Fichier : Vecteur.h
- Auteur(s) : Loïc Geinoz, Teo Ferrari
+ Auteur(s) : Loï¿½c Geinoz, Teo Ferrari
  Date : 09.04.2019
 
- But : Définition des différentes fonctions de la classe Vecteur ainsi que des
- surcharges d'opérateur et définition et implémenation des constructeurs
+ But : Dï¿½finition des diffï¿½rentes fonctions de la classe Vecteur ainsi que des
+ surcharges d'opï¿½rateur et dï¿½finition et implï¿½menation des constructeurs
  ---------------------------------------------------------------------------------- -
  */
 
@@ -16,7 +16,7 @@
 #include <vector>
 #include <iostream>
 
-//Implémentation de l'opérateur <<
+//Implï¿½mentation de l'opï¿½rateur <<
 template<typename T> class Vecteur;
 template<typename T>
 std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
@@ -31,41 +31,42 @@ std::ostream & operator<<(std::ostream & os, const Vecteur<T>& vect) {
 	return os;
 }
 
-//Définission de la classe vecteur
+//Dï¿½finission de la classe vecteur
 template<typename T>
 class Vecteur {
 	friend std::ostream& operator<<<T>(std::ostream& os,
 			const Vecteur<T>& vect);
 
 public:
-	//Définission des constructeurs
+	//Dï¿½finission des constructeurs
 	Vecteur() :
 			contenuVecteur(vector < T > (0)) {
 
 	}
 	Vecteur(vector<T> vect) :
 			contenuVecteur(vector<T>()) {
+
 		contenuVecteur = vect;
 	}
 	Vecteur(size_t n) :
 			contenuVecteur(vector < T > (n)) {
 	}
 
-	//Définission des fonctions publiques
+	//Dï¿½finission des fonctions publiques
 	T& at(size_t n);
 	T at(size_t n) const;
 	void resize(size_t size);
 	T somme() const;
 	unsigned size() const noexcept;
 
-	//Définission des surcharges d'opérateur
+	//Dï¿½finission des surcharges d'opï¿½rateur
 	Vecteur<T> operator*(T valeur);
 	Vecteur<T> operator*(Vecteur vect);
 	Vecteur<T> operator+(Vecteur vect);
 	Vecteur<T> operator-(Vecteur vect);
 
 private:
-	//Définission de la propriété pour les contenu
+	//Dï¿½finission de la propriï¿½tï¿½ pour les contenu
 	vector<T> contenuVecteur;
 };
 #include "VecteurImpl.h"
