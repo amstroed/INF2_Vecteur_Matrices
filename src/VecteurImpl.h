@@ -17,6 +17,7 @@
 #include "Erreurs.h"
 #include <vector>
 #include <string>
+#include <limits>
 
 const string FILENAMEVECTEUR = "VecteurImpl.h";
 
@@ -91,6 +92,14 @@ Vecteur<T> Vecteur<T>::operator*(T valeur) {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
+	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
+		if ((this->contenuVecteur.at(i) * vect.contenuVecteur.at(i))
+				> std::numeric_limits<T>::max()) {
+			throw Erreur_overflow(
+					FILENAMEVECTEUR + "::Dépassement de capacité");
+		}
+	}
+
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR
@@ -110,6 +119,14 @@ Vecteur<T> Vecteur<T>::operator *(Vecteur vect) {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
+	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
+		if ((this->contenuVecteur.at(i) + vect.contenuVecteur.at(i))
+				> std::numeric_limits<T>::max()) {
+			throw Erreur_overflow(
+					FILENAMEVECTEUR + "::Dépassement de capacité");
+		}
+	}
+
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR + "::Tentative d'addition sur un vecteur vide");
@@ -128,6 +145,14 @@ Vecteur<T> Vecteur<T>::operator +(Vecteur vect) {
 
 template<typename T>
 Vecteur<T> Vecteur<T>::operator -(Vecteur vect) {
+	for (size_t i = 0; i < this->contenuVecteur.size(); ++i) {
+		if ((this->contenuVecteur.at(i) - vect.contenuVecteur.at(i))
+				> std::numeric_limits<T>::max()) {
+			throw Erreur_overflow(
+					FILENAMEVECTEUR + "::Dépassement de capacité");
+		}
+	}
+
 	if (this->contenuVecteur.empty() || vect.contenuVecteur.empty()) {
 		throw Erreur_vecteurVide(
 				FILENAMEVECTEUR

@@ -8,7 +8,6 @@
 
 const string FILENAMEMATRICE = "MatriceImpl.h";
 
-
 template<typename T>
 Vecteur<T>& Matrice<T>::at(unsigned n) {
 
