@@ -38,7 +38,8 @@ T Vecteur<T>::at(size_t n) const {
 	try {
 		return this->contenuVecteur.at(n);
 	}
-	//On r�cup�re l'erreur dans le cas o� l'utilisateur essaye d'acc�der � un �l�ment en dehors des limites
+	//On r�cup�re l'erreur dans le cas o� l'utilisateur essaye d'acc�der � 
+        //un �l�ment en dehors des limites
 	catch (out_of_range&) {
 		throw Erreur_Hors_limites(
 				FILENAMEVECTEUR + "::Element en dehors des limites");
